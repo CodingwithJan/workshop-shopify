@@ -1463,6 +1463,21 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "background-1"
+      },
+      {
+        "type": "header",
+        "content": "Configure an Upsell"
+      },
+      {
+        "type": "text",
+        "id": "cart_drawer_upsell_headline",
+        "label": "Upsell Product Headline",
+        "default": "🛑 Wait! Try our product of the week."
+      },
+      {
+        "type": "product",
+        "id": "cart_drawer_upsell_product",
+        "label": "Upsell Product"
       }
     ]
   }
