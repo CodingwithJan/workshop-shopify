@@ -9,6 +9,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
 <style>
@@ -447,6 +448,39 @@
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
       </cart-drawer-items>
+
+      {%comment%} Add upsell at the end of the cart. Also check whether an upsell product is selected. {%endcomment%}
+      {%- if settings.cart_drawer_upsell_product != blank and cart != empty -%}
+
+        <div class="cart-drawer__upsell-container">
+          {%comment%} Check if cart already contains the upsel {%endcomment%}
+          {% assign cart_contains_upsell = false %}
+          {%- for item in cart.items -%}
+            {%- if item.product_id == settings.cart_drawer_upsell_product.id -%}
+              {% assign cart_contains_upsell = true %}
+            {%- endif -%}
+          {%- endfor -%}
+          
+          {%comment%} if cart doesn't contain the product, show it {%endcomment%}
+          {%- unless cart_contains_upsell -%}
+            {%- if settings.cart_drawer_upsell_headline -%}
+              <div class="cart-drawer__upsell-headline">{{ settings.cart_drawer_upsell_headline }}</div>
+            {%- endif -%}
+
+            <div class="cart-drawer__upsell-product">
+                {% render 'card-product',
+                card_product: settings.cart_drawer_upsell_product,
+                horizontal_class:true,
+                show_quick_add: true,
+                section_id: section.id
+                %}
+            </div>
+          {%- endunless -%}
+        </div>
+
+      {%- endif -%}
+
+
       <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">

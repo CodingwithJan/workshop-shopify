@@ -117,6 +117,8 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "cart_color_scheme": "background-1",
+    "cart_drawer_upsell_headline": "☕ Try our coffee of the week.",
+    "cart_drawer_upsell_product": "coffee-vietnam",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
